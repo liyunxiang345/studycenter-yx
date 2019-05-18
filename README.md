@@ -1,17 +1,17 @@
 # component-exercise
 
-> A Vue.js project
+> 李云翔的Vue项目架构
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 下载依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 在本地localhost:9000运行
 npm run dev
 
-# build for production with minification
+# 项目打包
 npm run build
 
 # build for production and view the bundle analyzer report
