@@ -13,3 +13,28 @@
 .pull-right {
   float: right;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+// 横向超出部分省略号
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+// 纵向超出行数省略号
+.line-overflow(@line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+}

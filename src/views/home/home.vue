@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <swiper-module></swiper-module>
-    <div class="type-module">
+    <div class="type-module clearfix">
       <div class="type-item pull-left" v-for="(item,$index) in type_list" :key="$index">
         <img class="title font-18 pull-left" :src="item.img_url">
       </div>
@@ -37,7 +37,6 @@ export default {
   .type-module {
     width: 1124px;
     margin: 26px auto 0;
-    overflow: hidden;
     padding-top: 0;
     .type-item {
       width: 200px;

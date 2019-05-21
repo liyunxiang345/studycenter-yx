@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import navigatorModule from "@/components/navigator.vue";
+import navigatorModule from "@/components/navigator";
 export default {
   name: "MyApp",
   components: {

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Filter from "@/filters/index";
 import './plugins/element'
+import "./style/main.less";
 Vue.config.productionTip = false
 
 Vue.use(Filter);
