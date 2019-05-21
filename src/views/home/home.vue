@@ -6,15 +6,25 @@
         <img class="title font-18 pull-left" :src="item.img_url">
       </div>
     </div>
+    <div class="home-module">
+      <h4 class="home-module-title font-26">
+        新品
+        <span class="font-14">/</span>
+        <span class="font-14">专区</span>
+      </h4>
+      <div class="home-module-banner">
+        <img src="@/assets/images/home/newArea.png" alt>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import swiperModule from "@/components/swiper.vue";
-import newImg from "@/assets/images/tags/new.png";
-import birthdayImg from "@/assets/images/tags/birthday.png";
-import childrenImg from "@/assets/images/tags/children.png";
-import partyImg from "@/assets/images/tags/party.png";
-import activityImg from "@/assets/images/tags/activity.png";
+import newImg from "@/assets/images/home/new.png";
+import birthdayImg from "@/assets/images/home/birthday.png";
+import childrenImg from "@/assets/images/home/children.png";
+import partyImg from "@/assets/images/home/party.png";
+import activityImg from "@/assets/images/home/activity.png";
 export default {
   components: {
     swiperModule
@@ -48,6 +58,32 @@ export default {
         margin-left: 35px;
         line-height: 100px;
         font-weight: 500;
+      }
+    }
+  }
+  .home-module {
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 50px;
+    .home-module-title {
+      width: 1100px;
+      color: #724228;
+      line-height: 36px;
+      font-weight: normal;
+      margin: 0 auto 20px;
+      span {
+        color: #8e5d43;
+      }
+    }
+    .home-module-banner {
+      width: 1100px;
+      height: 250px;
+      margin: 0 auto;
+      padding-top: 100px;
+      margin-top: -100px;
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
   }
