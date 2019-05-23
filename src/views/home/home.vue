@@ -6,14 +6,14 @@
         <img class="title font-18 pull-left" :src="item.img_url">
       </div>
     </div>
-    <div class="home-module">
+    <div class="home-module" v-for="(item,$index) in type_list" :key="$index">
       <h4 class="home-module-title font-26">
-        新品
+        {{item.title}}
         <span class="font-14">/</span>
         <span class="font-14">专区</span>
       </h4>
       <div class="home-module-banner">
-        <img src="@/assets/images/home/newArea.png" alt>
+        <img :src="item.banner_url" alt>
       </div>
     </div>
   </div>
@@ -25,6 +25,10 @@ import birthdayImg from "@/assets/images/home/birthday.png";
 import childrenImg from "@/assets/images/home/children.png";
 import partyImg from "@/assets/images/home/party.png";
 import activityImg from "@/assets/images/home/activity.png";
+import newAreaImg from "@/assets/images/home/newArea.png";
+import birthdayAreaImg from "@/assets/images/home/birthdayArea.png";
+import partyAreaImg from "@/assets/images/home/partyArea.png";
+import childAreaImg from "@/assets/images/home/childArea.png";
 export default {
   components: {
     swiperModule
@@ -32,11 +36,11 @@ export default {
   data() {
     return {
       type_list: [
-        { title: "新品", img_url: newImg },
-        { title: "生日", img_url: birthdayImg },
-        { title: "儿童", img_url: childrenImg },
-        { title: "聚会", img_url: partyImg },
-        { title: "活动专区", img_url: activityImg }
+        { title: "新品", img_url: newImg, banner_url: newAreaImg },
+        { title: "生日", img_url: birthdayImg, banner_url: birthdayAreaImg },
+        { title: "儿童", img_url: childrenImg, banner_url: childAreaImg },
+        { title: "聚会", img_url: partyImg, banner_url: partyAreaImg },
+        { title: "活动专区", img_url: activityImg, banner_url: newAreaImg }
       ]
     };
   }
