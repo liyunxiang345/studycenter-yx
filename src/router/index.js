@@ -8,43 +8,50 @@ import Area from '@/views/area/area'
 import Give from '@/views/give/give'
 import Icecream from '@/views/icecream/icecream'
 import Tea from '@/views/tea/tea'
+import Demo from '@/demo/demo'
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-    path: '/',
-    name: 'myapp',
-    component: MyApp,
-    redirect: '/home',
-    children: [{
-      path: '/home',
-      name: 'home',
-      component: Home
-    }, {
-      path: "/cake",
-      name: "cake",
-      component: Cake
-    }, {
-      path: "/bread",
-      name: "bread",
-      component: Bread
-    }, {
-      path: "/area",
-      name: "area",
-      component: Area
-    }, {
-      path: "/give",
-      name: "give",
-      component: Give
-    }, {
-      path: "/tea",
-      name: "tea",
-      component: Tea
-    }, {
-      path: "/icecream",
-      name: "icecream",
-      component: Icecream
-    }]
-  }]
+      path: '/',
+      name: 'myapp',
+      component: MyApp,
+      redirect: '/home',
+      children: [{
+        path: '/home',
+        name: 'home',
+        component: Home
+      }, {
+        path: "/cake",
+        name: "cake",
+        component: Cake
+      }, {
+        path: "/bread",
+        name: "bread",
+        component: Bread
+      }, {
+        path: "/area",
+        name: "area",
+        component: Area
+      }, {
+        path: "/give",
+        name: "give",
+        component: Give
+      }, {
+        path: "/tea",
+        name: "tea",
+        component: Tea
+      }, {
+        path: "/icecream",
+        name: "icecream",
+        component: Icecream
+      }]
+    },
+    {
+      path: "/demo",
+      name: "demo",
+      component: Demo,
+    }
+  ]
 
 })
