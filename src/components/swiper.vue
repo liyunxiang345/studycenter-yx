@@ -13,13 +13,15 @@
 import swiper1 from "../assets/images/swiper/swiper1.jpg";
 import swiper2 from "../assets/images/swiper/swiper2.jpg";
 import swiper3 from "../assets/images/swiper/swiper3.jpg";
+import swiper4 from "../assets/images/swiper/swiper4.jpg";
 export default {
   data() {
     return {
       swiperList: [
         { picture: swiper1 },
         { picture: swiper2 },
-        { picture: swiper3 }
+        { picture: swiper3 },
+        { picture: swiper4 }
       ]
     };
   }

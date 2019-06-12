@@ -20,15 +20,6 @@
 </template>
 <script>
 import swiperModule from "@/components/swiper.vue";
-import newImg from "@/assets/images/home/new.png";
-import birthdayImg from "@/assets/images/home/birthday.png";
-import childrenImg from "@/assets/images/home/children.png";
-import partyImg from "@/assets/images/home/party.png";
-import activityImg from "@/assets/images/home/activity.png";
-import newAreaImg from "@/assets/images/home/newArea.png";
-import birthdayAreaImg from "@/assets/images/home/birthdayArea.png";
-import partyAreaImg from "@/assets/images/home/partyArea.png";
-import childAreaImg from "@/assets/images/home/childArea.png";
 export default {
   components: {
     swiperModule
@@ -36,11 +27,31 @@ export default {
   data() {
     return {
       type_list: [
-        { title: "新品", img_url: newImg, banner_url: newAreaImg },
-        { title: "生日", img_url: birthdayImg, banner_url: birthdayAreaImg },
-        { title: "儿童", img_url: childrenImg, banner_url: childAreaImg },
-        { title: "聚会", img_url: partyImg, banner_url: partyAreaImg },
-        { title: "活动专区", img_url: activityImg, banner_url: newAreaImg }
+        {
+          title: "新品",
+          img_url: require("@/assets/images/home/new.png"),
+          banner_url: require("@/assets/images/home/newArea.png")
+        },
+        {
+          title: "生日",
+          img_url: require("@/assets/images/home/birthday.png"),
+          banner_url: require("@/assets/images/home/birthdayArea.png")
+        },
+        {
+          title: "儿童",
+          img_url: require("@/assets/images/home/children.png"),
+          banner_url: require("@/assets/images/home/childArea.png")
+        },
+        {
+          title: "聚会",
+          img_url: require("@/assets/images/home/party.png"),
+          banner_url: require("@/assets/images/home/partyArea.png")
+        },
+        {
+          title: "活动专区",
+          img_url: require("@/assets/images/home/activity.png"),
+          banner_url: require("@/assets/images/home/newArea.png")
+        }
       ]
     };
   }
