@@ -10,10 +10,10 @@
 </template>
 <script>
 /**
- * @author Leeyunx
- * @param {Object} file
- * @param {String || Function} action
- * @param {Array} sizelimit
+ * @author Leeyunxiang
+ * @param {Function} beforeUpload 上传前的回调
+ * @param {String || Function} action 上传图片接口
+ * @param {Object} sizelimit 图片长宽限制
  */
 export default {
   props: {
