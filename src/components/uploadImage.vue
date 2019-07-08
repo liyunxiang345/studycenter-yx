@@ -35,38 +35,40 @@ export default {
   },
   methods: {
     getFile(e) {
+      if (e.target.files.length > 0) {
+        this.file_message = e.target.files[0];
+        this.checkSize(this.file_message)
+          .then(() => {
+            this.$message.success("通过验证");
+            this.upload();
+          })
+          .catch(err => {
+            this.$message.error(err);
+          });
+      } else {
+        return false;
+      }
+    },
+    checkSize(file) {
       let _this = this;
-      _this.file_message = e.target.files[0];
       return new Promise((resolve, reject) => {
-        if (_this.beforeUpload(_this.file_message)) {
-          resolve();
-        } else {
-          reject();
-        }
-      })
-        .then(() => {
-          // 校验图片长宽是否满足参数限制
-          let url = window.URL.createObjectURL(_this.file_message);
+        if (_this.beforeUpload(file)) {
+          let url = window.URL.createObjectURL(file);
           let img = new Image();
           img.src = url;
           img.onload = () => {
             if (img.width > _this.sizelimit.width) {
-              this.$message.error(`图片宽度不能超过${_this.sizelimit.width}px`);
-              return false;
+              reject(`图片宽度不能超过${_this.sizelimit.width}px`);
             }
             if (img.height > _this.sizelimit.height) {
-              this.$message.error(
-                `图片高度不能超过${_this.sizelimit.height}px`
-              );
-              return false;
+              reject(`图片高度不能超过${_this.sizelimit.height}px`);
             }
-            this.$message.success("通过");
+            resolve();
           };
-        })
-        .catch(err => {
-          this.$message.error(err);
-        });
-      this.upload();
+        } else {
+          reject();
+        }
+      });
     },
     upload() {
       if (typeof this.action === "function") {
