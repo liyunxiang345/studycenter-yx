@@ -1,20 +1,30 @@
 <template>
-  <div
-    class="upload-image"
-    @mouseover.prevent="is_hover = true"
-    @mouseleave.prevent="is_hover = false"
-  >
-    <!-- 表单层 -->
-    <input class="real-form" type="file" ref="input" :value="file" @change="getFile($event)" />
-    <!-- 上传层 -->
-    <div class="upload-ui-wrap" v-if="!is_upload">
-      <div class="upload-before">
-        <i class="el-icon-plus upload-icon"></i>
+  <div>
+    <div
+      class="upload-image"
+      @mouseover.prevent="$item.is_hover = true"
+      @mouseleave.prevent="$item.is_hover = false"
+      v-for="($item,$index) in image_list"
+      :key="$index"
+    >
+      <!-- 表单层 -->
+      <input class="real-form" type="file" ref="input" @change="getFile($event,$index)" />
+      <!-- 上传层 -->
+      <div class="upload-ui-wrap" v-if="!$item.is_upload">
+        <div class="upload-before">
+          <i class="el-icon-plus upload-icon"></i>
+        </div>
       </div>
-    </div>
-    <!-- 展示层 -->
-    <div class="upload-done" v-if="is_upload" :style="{backgroundImage:`url(${temp_url})`}">
-      <div class="upload-mask" v-show="is_upload && is_hover"></div>
+      <!-- 展示层 -->
+      <div
+        class="upload-done"
+        v-if="$item.is_upload"
+        :style="{backgroundImage:`url(${$item.temp_url})`}"
+      >
+        <div class="upload-mask" v-show="$item.is_upload && $item.is_hover">
+          <i class="el-icon-delete bin" @click="deleteImage($index)"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +36,7 @@
  * @param {Object} sizelimit 图片长宽限制
  */
 export default {
+  name: "UploadImage",
   props: {
     beforeUpload: {
       type: Function
@@ -36,27 +47,27 @@ export default {
       default: {}
     }
   },
-  name: "UploadImage",
   data() {
     return {
-      file: null, //文件
-      file_message: null, //文件的信息
-      temp_url: "", //测试开发阶段临时图片
-      is_upload: false,
-      is_hover: false //鼠标是否移动到其中
+      image_list: [
+        {
+          file_message: null, //文件的信息
+          temp_url: "", //测试开发阶段临时图片
+          is_upload: false,
+          is_hover: false //鼠标是否移动到其中
+        }
+      ]
     };
   },
   methods: {
-    test() {
-      console.log(111);
-    },
-    getFile(e) {
+    getFile(e, i) {
       if (e.target.files.length > 0) {
-        this.file_message = e.target.files[0];
-        this.checkSize(this.file_message)
+        this.image_list[i].file_message = e.target.files[0];
+        this.checkSize(this.image_list[i].file_message, i)
           .then(() => {
             this.$message.success("通过验证");
-            this.upload();
+            this.image_list[i].is_upload = true;
+            this.upload(this.image_list[i].file_message);
           })
           .catch(err => {
             this.$message.error(err);
@@ -65,12 +76,11 @@ export default {
         return false;
       }
     },
-    checkSize(file) {
+    checkSize(file, i) {
       let _this = this;
       return new Promise((resolve, reject) => {
         if (_this.beforeUpload(file)) {
           let url = window.URL.createObjectURL(file);
-          this.temp_url = url;
           let img = new Image();
           img.src = url;
           img.onload = () => {
@@ -80,7 +90,7 @@ export default {
             if (img.height > _this.sizelimit.height) {
               reject(`图片高度不能超过${_this.sizelimit.height}px`);
             }
-            this.is_upload = true;
+            this.image_list[i].temp_url = url;
             resolve();
           };
         } else {
@@ -88,13 +98,23 @@ export default {
         }
       });
     },
+    deleteImage(i) {
+      this.image_list[i].is_upload = false;
+      this.image_list[i].temp_url = "";
+    },
     upload() {
       if (typeof this.action === "function") {
-        const url = this.action();
+        let urls = this.action();
       } else {
-        const url = this.action;
+        let urls = this.action;
       }
-      return new Promise((resolve, reject) => {});
+      let obj = {
+        file_message: null, //文件的信息
+        temp_url: "", //测试开发阶段临时图片
+        is_upload: false,
+        is_hover: false //鼠标是否移动到其中
+      };
+      this.image_list.push(obj);
     }
   }
 };
@@ -106,6 +126,7 @@ export default {
   border: 1px dashed #c0ccda;
   border-radius: 6px;
   position: relative;
+  display: inline-block;
   &:hover {
     border-color: #409eff;
   }
@@ -144,6 +165,16 @@ export default {
       border-radius: 6px;
       top: 0;
       left: 0;
+      z-index: 1000;
+      cursor: pointer;
+      .bin {
+        color: #ffffff;
+        font-size: 20px;
+        position: absolute;
+        left: 45%;
+        top: 45%;
+        z-index: 1000;
+      }
     }
   }
   .real-form {

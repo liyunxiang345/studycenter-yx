@@ -4,10 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Filter from "@/filters/index";
+import axios from "axios";
 import './plugins/element'
 import "./style/main.less";
 Vue.config.productionTip = false
-
+Vue.prototype.$ajax = axios;
 Vue.use(Filter);
 /* eslint-disable no-new */
 new Vue({

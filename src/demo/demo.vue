@@ -45,7 +45,7 @@ export default {
       console.log(file);
     },
     uploadUrl() {
-      return "https://jsonplaceholder.typicode.com/posts/";
+      return "http://console-api-dev.crs.dev-test.vchangyi.com/upload";
     }
   }
 };
