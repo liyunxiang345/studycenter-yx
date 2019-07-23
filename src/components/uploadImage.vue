@@ -1,31 +1,40 @@
 <template>
   <div>
-    <div
-      class="upload-image"
-      @mouseover.prevent="$item.is_hover = true"
-      @mouseleave.prevent="$item.is_hover = false"
-      v-for="($item,$index) in image_list"
-      :key="$index"
+    <draggable
+      :options="{group:'image_list',animation:150,ghostClass:'sortable-ghost',chosenClass:'chosenClass',scroll:true,scrollSensitivity:200}"
+      v-model="list"
+      @end="dragEnd"
+      @start="dragStart"
     >
-      <!-- 表单层 -->
-      <input class="real-form" type="file" ref="input" @change="getFile($event,$index)" />
-      <!-- 上传层 -->
-      <div class="upload-ui-wrap" v-if="!$item.is_upload">
-        <div class="upload-before">
-          <i class="el-icon-plus upload-icon"></i>
-        </div>
-      </div>
-      <!-- 展示层 -->
+      <!-- 一个上传器个体 -->
       <div
-        class="upload-done"
-        v-if="$item.is_upload"
-        :style="{backgroundImage:`url(${$item.temp_url})`}"
+        class="upload-image"
+        @mouseover.prevent="$item.is_hover = true"
+        @mouseleave.prevent="$item.is_hover = false"
+        v-for="($item,$index) in image_list"
+        :key="$index"
+        v-show="$index != limit"
       >
-        <div class="upload-mask" v-show="$item.is_upload && $item.is_hover">
-          <i class="el-icon-delete bin" @click="deleteImage($index)"></i>
+        <!-- 表单层 -->
+        <input class="real-form" type="file" ref="input" @change="getFile($event,$index)" />
+        <!-- 上传层 -->
+        <div class="upload-ui-wrap" v-if="!$item.is_upload">
+          <div class="upload-before">
+            <i class="el-icon-plus upload-icon"></i>
+          </div>
+        </div>
+        <!-- 展示层 -->
+        <div
+          class="upload-done"
+          v-if="$item.is_upload"
+          :style="{backgroundImage:`url(${$item.temp_url})`}"
+        >
+          <div class="upload-mask" v-show="$item.is_upload && $item.is_hover">
+            <i class="el-icon-delete bin" @click="deleteImage($index)"></i>
+          </div>
         </div>
       </div>
-    </div>
+    </draggable>
   </div>
 </template>
 <script>
@@ -34,9 +43,14 @@
  * @param {Function} beforeUpload 上传前的回调
  * @param {String || Function} action 上传图片接口
  * @param {Object} sizelimit 图片长宽限制
+ * @param {Number} limit 允许上传图片张数
  */
+import draggable from "vuedraggable";
 export default {
   name: "UploadImage",
+  components: {
+    draggable
+  },
   props: {
     beforeUpload: {
       type: Function
@@ -45,6 +59,10 @@ export default {
     sizelimit: {
       type: Object,
       default: {}
+    },
+    limit: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -99,8 +117,7 @@ export default {
       });
     },
     deleteImage(i) {
-      this.image_list[i].is_upload = false;
-      this.image_list[i].temp_url = "";
+      this.image_list.splice(i, 1);
     },
     upload() {
       if (typeof this.action === "function") {
@@ -126,7 +143,7 @@ export default {
   border: 1px dashed #c0ccda;
   border-radius: 6px;
   position: relative;
-  display: inline-block;
+  float: right;
   &:hover {
     border-color: #409eff;
   }
