@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Filter from "@/filters/index";
+import Directives from "@/directives/index";
 import axios from "axios";
 import store from "./store";
 import './plugins/element'
@@ -11,6 +12,7 @@ import "./style/main.less";
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios;
 Vue.use(Filter);
+Vue.use(Directives);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
