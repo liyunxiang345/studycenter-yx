@@ -17,6 +17,8 @@ npm run build
 # 生产环境打包
 npm run build --report
 
+# 目录架构
+stydycenter-yx
 ├── build        // webpack公共配置
 ├── config      // vue配置
 ├── src
@@ -24,7 +26,7 @@ npm run build --report
 │   ├── components   // 公共组件
 │   ├── direcive     // 公用指令
 │   ├── demo         // 练习Demo
-|   ├── filters      // 公共过滤器
+│   ├── filters      // 公共过滤器
 │   ├── mixins       // 全局Mixin
 │   ├── plugins      // 插件配置
 │   ├── router       // 路由配置
@@ -41,5 +43,3 @@ npm run build --report
 ├── package.json     // package.json
 └── README.md        // 项目说明
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
