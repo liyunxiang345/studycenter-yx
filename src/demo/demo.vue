@@ -14,6 +14,7 @@
 import draggable from "vuedraggable";
 import uploadImage from "@/components/uploadImage";
 import UploadValidate from "@/mixins/UploadValidate.js";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   components: { draggable, uploadImage },
   mixins: [UploadValidate],
@@ -41,7 +42,14 @@ export default {
     //   return "http://console-api-dev.crs.dev-test.vchangyi.com/upload";
     // }
   },
+  computed: {
+    ...mapState({
+      isShow: state => state.Status.status,
+      userinfo: state => state.User.userinfo
+    })
+  },
   mounted() {
+    console.log(this.isShow, this.userinfo);
     let user = this.$store.state.User.userinfo;
     console.log(user);
     this.$store.dispatch("User/changeUser", "叶修");
