@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Filter from "@/filters/index";
 import axios from "axios";
+import store from "./store";
 import './plugins/element'
 import "./style/main.less";
 Vue.config.productionTip = false
@@ -14,6 +15,7 @@ Vue.use(Filter);
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
