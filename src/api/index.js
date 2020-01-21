@@ -8,6 +8,13 @@ let apis = {
       method: "GET",
       params: data
     });
+  },
+  // 蛋糕的列表？？？
+  cakeList(data) {
+    return http("/cake/cake-list", {
+      method: "GET",
+      params: data
+    })
   }
 }
 export default apis;

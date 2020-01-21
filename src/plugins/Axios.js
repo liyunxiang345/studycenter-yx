@@ -38,7 +38,7 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     loadingInstance.close();
-    if ((response.status === 200 || response.status === 210) && response.data.error === "ERROR") {
+    if ((response.status === 200 || response.status === 210 || response.status === 340) && response.data.error === "ERROR") {
       Message({
         showClose: true,
         type: "error",
@@ -47,7 +47,7 @@ _axios.interceptors.response.use(
       });
       return Promise.reject(response);
     } else {
-      return response;
+      return Promise.resolve(response.data);
     }
   },
   function (error) {

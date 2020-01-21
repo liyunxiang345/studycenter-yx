@@ -6,6 +6,7 @@
   
 <script>
 import menuModule from "@/components/menu";
+import Api from "@/api/index";
 export default {
   components: {
     menuModule
@@ -32,6 +33,20 @@ export default {
         { name: "冰淇淋" }
       ]
     };
+  },
+  methods: {
+    async getList() {
+      try {
+        const { err_code, data } = await Api.cakeList();
+        this.flavor_list = data.flavor_list;
+        this.type_list = data.type_list;
+      } catch (err) {
+        this.$message.error(err.msg);
+      }
+    }
+  },
+  mounted() {
+    this.getList();
   }
 };
 </script>
