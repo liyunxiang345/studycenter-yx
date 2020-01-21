@@ -3,7 +3,7 @@
     <swiper-module></swiper-module>
     <div class="type-module clearfix">
       <div class="type-item pull-left" v-for="(item,$index) in type_list" :key="$index">
-        <img class="title font-18 pull-left" :src="item.img_url">
+        <img class="title font-18 pull-left" :src="item.img_url" />
       </div>
     </div>
     <div class="home-module" v-for="(item,$index) in type_list" :key="$index">
@@ -13,13 +13,14 @@
         <span class="font-14">专区</span>
       </h4>
       <div class="home-module-banner">
-        <img :src="item.banner_url" alt>
+        <img :src="item.banner_url" alt />
       </div>
     </div>
   </div>
 </template>
 <script>
 import swiperModule from "@/components/swiper.vue";
+import Api from "@/api/index";
 export default {
   components: {
     swiperModule
@@ -54,6 +55,16 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    getData() {
+      Api.userInfo().then(res => {
+        console.log(res);
+      });
+    }
+  },
+  mounted() {
+    this.getData();
   }
 };
 </script>

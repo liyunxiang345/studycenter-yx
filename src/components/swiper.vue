@@ -24,6 +24,9 @@ export default {
         { picture: swiper4 }
       ]
     };
+  },
+  mounted() {
+    console.log(this.$parent);
   }
 };
 </script>
